@@ -2,6 +2,7 @@ import express from "express";
 import exphbs from "express-handlebars";
 import bodyParser from "body-parser";
 import path from "path";
+import config from "./config/config";
 
 // Database
 import { db } from "./config/database";
