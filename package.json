@@ -8,7 +8,16 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "build": ".\\node_modules\\.bin\\babel src --out-dir dist",
     "start": "babel-node src/app.js",
-    "dev": "nodemon --exec babel-node src/app.js"
+    "dev": "nodemon --exec babel-node src/app.js",
+    "init-sequelize": "sequelize init",
+    "user-model": "sequelize model:generate --name User --attributes name:string,email:string",
+    "post-model": "sequelize model:generate --name Post --attributes title:string,content:text,userId:integer",
+    "comment-model": "sequelize model:generate --name Comment --attributes postId:integer,comment:text,userId:integer",
+    "create-tables": "sequelize db:migrate",
+    "seed-user": "sequelize seed:generate --name User",
+    "seed-post": "sequelize seed:generate --name Post",
+    "seed-comment": "sequelize seed:generate --name Comment",
+    "insert-tables": "sequelize db:seed:all"
   },
   "repository": {
     "type": "git",
@@ -28,7 +37,8 @@
     "express-handlebars": "^5.2.0",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",
