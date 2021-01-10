@@ -1,28 +1,29 @@
-import express from "express";
-import exphbs from "express-handlebars";
-import bodyParser from "body-parser";
-import path from "path";
+import express from 'express';
+import dotenv from 'dotenv';
+import Sequelize from "sequelize";
 import config from "./config/config";
-
-// Database
-import { db } from "./config/database";
-
-// Gigs routes
-import gigsRoutes from "./routes/gigs";
+import usersRoutes from "./routes/usersRoutes";
 
 const app = express();
 
+dotenv.config();
+
+// Database url
+const DEV_DB_url = config.development.url;
+
+//Connecting to database
+const sequelize = new Sequelize(DEV_DB_url);
+
 // Test DB
-db.authenticate()
+sequelize.authenticate()
     .then(() => console.log(`Database connected...`))
     .catch(err => console.log(`Error: ${err}`));
-    
-// db.close();
 
+const basePath = '/api'
 // routes
-app.get('/', (req, res) => res.status(200).send('INDEX'));
-app.use('/gigs', gigsRoutes);
+app.get(`${basePath}`, (req, res) => res.status(200).send('INDEX'));
+app.use(`${basePath}/users`, usersRoutes);
+app.get('**', (req, res) => { res.status(400).send({ status: 404, message: `404 Page Not Found on CodeGig!` }); });
 
-const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, console.log(`Server started on PORT ${PORT}`));
+export default app;

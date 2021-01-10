@@ -1,9 +1,18 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config()
 
 export default {
-    DB_NAME: process.env.DB_NAME,
-    DB_USERNAME: process.env.DB_USERNAME,
-    DB_PASSWORD: process.env.DB_PASSWORD
-};
+  development: {
+    url: process.env.DEV_DATABASE_URL,
+    dialect: 'postgres',
+  },
+  test: {
+    url: process.env.TEST_DATABASE_URL,
+    dialect: 'postgres',
+  },
+  production: {
+    url: process.env.DATABASE_URL,
+    dialect: 'postgres',
+  }
+}
