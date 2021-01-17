@@ -12,6 +12,7 @@ describe('Testing App Endpoint', () => {
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.a('object');
+        expect(res.body.message).to.equals('Welcome on CodeGig');
       })
   });
 });
