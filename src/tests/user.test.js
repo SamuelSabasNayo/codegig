@@ -12,7 +12,7 @@ describe('Testing User Endpoint', () => {
     request(app)
       .get('/api/v1/users')
       .end((err, res) => {
-        expect(res).to.have.status(200);
+        expect(res).to.have.status(400);
         done();
       })
   });
