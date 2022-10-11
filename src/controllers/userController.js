@@ -13,6 +13,19 @@ export class UserController {
       res.status(400).json(`Error: ${error}`);
     }
   };
+
+  static async getOneUser(req, res) {
+    try {
+      const myUser = await User.findOne({
+        where: { id: req.params.id }
+      });
+
+      console.log(myUser);
+      res.status(200).json({ message: myUser });
+    } catch (error) {
+      res.status(400).json(`Error: ${error}`);
+    }
+  };
   
   static async addUser(req, res) {
     try {

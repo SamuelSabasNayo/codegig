@@ -7,7 +7,7 @@ const { User } = models;
 const router = Router();
 /**
 *  @swagger
-*  /users:
+*  api/v1/users:
 *   get:
 *    description: Get a list of all users
 *    responses:
@@ -17,8 +17,27 @@ const router = Router();
 router.get('/', UserController.getUsers);
 
 /**
+ *  @swagger
+ *  /api/v1/users/{id}:
+ *    get:
+ *      description: Get one user
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
+ *          schema:
+ *            type: integer
+ *            minimum: 1
+ *          description: request id
+ *      responses:
+ *        '200':
+ *          description: User is displayed sucessfully.
+ */
+router.get('/:id', UserController.getOneUser);
+
+/**
 *  @swagger
-*  /users/add:
+*  api/v1/users/add:
 *   post:
 *    description: Add a user
 *    responses:
